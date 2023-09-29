@@ -11,7 +11,7 @@ shadowJar {
     archivesBaseName = "BotAPI"
     archiveClassifier = ''
     archiveVersion = ''
-    destinationDirectory = file("$rootDir/.m2/repository/me/kokodevs/BotAPI/1.0")
+    destinationDirectory = file("$rootDir/output")
 }
 
 publishing {
@@ -22,14 +22,31 @@ publishing {
     }
 }
 
+
 compileJava {
     options.compilerArgs += ["-parameters"]
     options.fork = true
     options.encoding = 'utf-8'
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                groupId = 'com.github.KokoDevs'
+                artifactId = 'BotAPI'
+                version = '1.0'
+            }
+        }
+    }
 }
 
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
