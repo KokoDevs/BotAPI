@@ -7,3 +7,4 @@ before_install:
   - mvn -v
 install:
   - mvn install -Dmaven.javadoc.skip=true -DskipTests
+  - mvn install:install-file "-DgroupId=me.kokodevs" "-DartifactId=BotAPI" "-Dversion=1.0" "-Dpackaging=jar" "-Dfile=output/BotAPI.jar"

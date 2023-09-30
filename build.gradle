@@ -31,20 +31,6 @@ compileJava {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            mavenJava(MavenPublication) {
-                groupId = 'com.github.KokoDevs'
-                artifactId = 'BotAPI'
-                version = '1.0'
-
-                from components.java
-            }
-        }
-    }
-}
 
 repositories {
     mavenCentral()

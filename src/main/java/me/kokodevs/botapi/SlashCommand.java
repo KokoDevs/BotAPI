@@ -24,6 +24,8 @@ public abstract class SlashCommand extends ListenerAdapter {
     public List<String> getPermissions() {return List.of();}
     public abstract void execute(SlashCommandInteractionEvent e, Map<String, Object> options);
 
+    protected String getPermissionMessage() {return "You don't have permission to execute this command!";}
+
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent e) {
         if (e.getFullCommandName().equals(getCommand())) {
@@ -36,7 +38,7 @@ public abstract class SlashCommand extends ListenerAdapter {
                     }
                 }
                 if (!hasPermission) {
-                    e.reply("You don't have permission to execute this command!").setEphemeral(true).queue();
+                    e.reply(getPermissionMessage()).setEphemeral(true).queue();
                     return;
                 }
             }

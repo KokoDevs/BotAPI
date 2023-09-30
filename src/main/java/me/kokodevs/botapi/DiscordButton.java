@@ -16,7 +16,9 @@ public abstract class DiscordButton extends ListenerAdapter {
     public List<String> getPermissions() {return List.of();}
 
     public abstract void onClick(ButtonInteractionEvent e);
-
+    protected String getPermissionMessage() {
+        return "You don't have permission to click this button!";
+    }
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
         if (!event.getButton().getId().equals(getButtonID())) return;
@@ -29,7 +31,7 @@ public abstract class DiscordButton extends ListenerAdapter {
                 }
             }
             if (!hasPermission) {
-                event.reply("You don't have permission to click this button!").setEphemeral(true).queue();
+                event.reply(getPermissionMessage()).setEphemeral(true).queue();
                 return;
             }
         }
